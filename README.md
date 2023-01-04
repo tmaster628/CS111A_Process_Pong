@@ -41,11 +41,16 @@ Use these as the arguments to the `player_hit()` function, which returns a float
 float player1_hit_quality = player_hit (player1_skill, previous_shot_difficulty);
 ```
 
-Next is where things get fun. If the result is True, you will write the char value "1" to the parent. Simiarly, if the result is False (miss), you will write a char value "0" to the parent.
+Next is where things get fun. You will `write` the `player1_hit_quality` value to the parent (Net) via a pipe. **Note** that you must also write the result of a miss to the parent (Net) in order to properly terminate your program. Think about ways you might be able to differentiate a hit or a miss with the values you `write`. After that, you'll need to wait for the opponent to hit.
 
 ### The Net turn
-To make things even more fun, The Net can reject balls hit from either player. The Net will reject a ball that is *successfully* hit from either player if the function `over_net()` returns false. This function takes in a single parameter, the `skill` float of the player who hit the ball last. If `over_net()` returns True, 
+To make things even more fun, The Net can reject balls hit from either player. The Net will reject a ball that is *successfully* hit from either player if the function `over_net()` returns false. This function takes in 2 parameters, the `skill` float of the player who hit the ball last, as well as the hit quality. If `over_net()` returns True, `write` the value of the hit quality to Player 2. If it returns False, the point is over, and the receiving player wins the point.
 
-TODO
-Figure out how we encode the answer? do you just write a 1 or a 0? That's all you need
-Leave it up to them to decide when to print...
+### Player 2 turn
+Player 2's turn will look very similar to Player 1's turn. They will call `player_hit` with `player2_skill` and the difficulty of the previous shot (which is read from a pipe connected to The Net). You'll then write the result of Player 2's hit back to The Net, and the game continues!
+
+## Program Design
+There are a number of things to consider when designing this program:
+* You will need to figure out where to put your print statements. So long as you're careful, you should have some flexibility here.
+* Although the point can be "lost" when a player misses the ball, the point can only be ended by the parent process (The Net). Keep than in mind.
+* Make sure that all file descriptors are closed once a point ends. Similarly, ensure that both Player processes are reaped upon completion.
