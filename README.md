@@ -52,5 +52,18 @@ Player 2's turn will look very similar to Player 1's turn. They will call `playe
 ## Program Design
 There are a number of things to consider when designing this program:
 * You will need to figure out where to put your print statements. So long as you're careful, you should have some flexibility here.
-* Although the point can be "lost" when a player misses the ball, the point can only be ended by the parent process (The Net). Keep than in mind.
-* Make sure that all file descriptors are closed once a point ends. Similarly, ensure that both Player processes are reaped upon completion.
+* Although the point can be "lost" when a player misses the ball, the point can only be ended by the parent process (The Net). Keep than in mind. You will probably need to send sentinel values between Parent / Children or vice-versa to ensure correctness in all cases.
+* Make sure that all file descriptors *as soon as possible* (i.e, think about which FD's a process will never use). If your program is not completing, it's almost definitely because some FD's in any of the processes was left open. Similarly, ensure that both Player processes are reaped upon completion.
+* Becuase sizing the buffer and string / float conversion can be stressful, here's some useful code to read a number like "0.5" into a buffer and convert it into a float:
+```       
+char buf[4]; // i.e 0.4 takes up 4 bytes.
+read(fd, buf, sizeof(buf));
+float float_version_of_buf = atof(buf);
+```
+* Now, here's a code snippet to convert a float like "0.5" into a char buffer and write it:
+```
+float some_float = 0.5;
+char buf[4];
+gcvt(some_float, 2, buf); // Converts float to string with 2 significant figures.
+write(fd, buf, sizeof(buf));
+```
