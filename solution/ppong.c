@@ -190,7 +190,7 @@ int main() {
 */
 float player_hit (float player_skill, float prev_shot_quality) {
     float random = (float)rand()/RAND_MAX;
-    float factor = player_skill * .3 + prev_shot_quality* .5 + random*.2;
+    float factor = player_skill * .3 + (1-prev_shot_quality) * .5 + random*.2;
     return factor;
 }
 
