@@ -18,9 +18,6 @@ Player 1 hits the ball.
 Player 2 misses the ball.
 Player 1 wins the point!
 ---
-Player 1 hits the ball out of bounds.
-Player 2 wins the point!
-```
 
 To implement this,there are **three** major players at hand: Player 1, Player 2, and The Net. You will fork two processes to represent Player1 and Player 2. The parent process will be The Net. Next, let's discuss the structure of a point
 
