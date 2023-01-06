@@ -1,7 +1,7 @@
 # A simple makefile for building a program composed of C source files.
-# Stolen by Trip to do CS111A stuff. Sorry Julie!
+# Stolen by Trip to do CS111A stuff. Original credits to Julie Zelenski.
 
-PROGRAMS = simple_print
+PROGRAMS = ppong
 
 all:: $(PROGRAMS)
 
