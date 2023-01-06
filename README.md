@@ -67,5 +67,14 @@ write(fd, buf, sizeof(buf));
 ```
 So long as you use the right file descriptors, you should be able to use these code snippets exactly.
 
+## Get the Starter Code
+To clone this repository, log into myth, navigate to where you want the project to live, and then type
 
+`git clone https://github.com/tmaster628/CS111A_Process_Pong.git`
+
+From there, `cd` into the repo and type `make`. 
+
+
+
+---
 *Side note: This problem is more difficult than an exam problem, but a little less difficult than an assignment problem. Doing it in a class period would be very ambitious, but it's a great problem to solidify your understanding of Processes, FD's and Read/Write. If you have some time before an exam, I'd recommend giving this a try and checking out my reference solution.*
