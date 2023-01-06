@@ -36,7 +36,7 @@ int main() {
     // Fork off player 1.
     pid_t player1_pid = fork();
     if (player1_pid == 0) {
-        // Close unused fds. Necessary to 
+        // Close unused fds. Necessary for correctness.
         close (p2_net[0]);
         close (p2_net[1]);
         close (net_p2[0]);
